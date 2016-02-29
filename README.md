@@ -3,7 +3,7 @@
 Bento is a project that encapsulates [Packer](https://www.packer.io/) templates for building
 [Vagrant](https://www.vagrantup.com/) base boxes and AWS AMIs
 
-This is a fork, of the [Chef Bento](https://github.com/chef/bento/blob/master/README.md) project
+This is a fork, of the [Chef Bento](https://github.com/chef/bento/blob/master/README.md) project, and will incorporate some elements from the automation/packrats repo as appropriate.
 
 ## Pre-built Boxes
 ## TODO: 
@@ -11,8 +11,8 @@ This is a fork, of the [Chef Bento](https://github.com/chef/bento/blob/master/RE
 
 The following boxes are built from this repository's templates and available from Artifactory
 
-|               | VirtualBox (5.0.12)      |
-|  ------------ | -------------            | 
+|               | VirtualBox (5.0+)        |
+| ------------- | ------------------------ | 
 | ubuntu-12.04  | todo                     |
 | ubuntu-14.04  | todo                     |
 
