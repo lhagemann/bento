@@ -73,10 +73,13 @@ Notes:
 
 Please use GitHub issues to report bugs, features, or other problems.
 
-## License & Authors
+## License & Authors & Acknowledgements Oh My
+
+Project forked from [Chef Bento](https://github.com/chef/bento)
 
 These basebox templates were converted from [veewee](https://github.com/jedi4ever/veewee)
 definitions originally based on
 [work done by Tim Dysinger](https://github.com/dysinger/basebox) to
 make "Don't Repeat Yourself" (DRY) modular baseboxes. Thanks Tim!
 
+Chef-zero provisioning copied from [Threat Stack packer templates](packer-templates)
