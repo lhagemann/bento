@@ -27,6 +27,15 @@ TODO: fill me in
 In the `bin` directory of this repo is the `bento` utility which wraps `packer` as well as allowing other related functionality.
 This is an opinionated tool that the project uses for building the hosted boxes listed above.
 
+```
+Usage: bento [SUBCOMMAND [options]]
+
+build     :   build one or more templates
+help      :   prints this help message
+list      :   list all templates in project
+normalize :   normalize one or more templates
+```
+
 To build multiple templates for all providers (VirtualBox, Fusion, Parallels, etc):
 
     $ bin/bento build debian-8.1-amd64 debian-8.1-i386
