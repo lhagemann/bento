@@ -9,3 +9,6 @@ sudo rm -rf /tmp/*
 
 sudo passwd -d ubuntu
 sudo rm /home/ubuntu/.ssh/authorized_keys
+
+# reassign /etc/chef
+sudo chown -R root:root /etc/chef

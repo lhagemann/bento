@@ -22,6 +22,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_url": "{{user `mirror`}}/{{user `mirror_directory`}}/{{user `iso_name`}}",
       "output_directory": "packer-{{user `template`}}-virtualbox",
+      "name": "vbox-freebsd-10",
       "shutdown_command": "su -m root -c 'shutdown -p now'",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -48,6 +49,7 @@
   ],
   "post-processors": [
     {
+      "only": "vbox-freebsd-9",
       "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
       "type": "vagrant",
       "vagrantfile_template": "vagrantfile_templates/freebsd.rb"
