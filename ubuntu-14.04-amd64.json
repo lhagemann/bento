@@ -41,7 +41,7 @@
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_username": "vagrant",
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10m",
       "type": "virtualbox-iso",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "1536" ],
@@ -87,8 +87,8 @@
       "type": "shell"
     }, 
     { "type": "shell", "script": "scripts/chef/bootstrap.sh" },    
-    { "type": "file", "source": "{{user `local_chef_dir`}}", "destination": "{{user `chef_dir`}}/cookbooks" },
-    { "type": "file", "source": "{{user `local_chef_data_bag_path`}}", "destination": "{{user `chef_dir`}}/data_bags" },
+    { "type": "file", "source": "{{user `local_chef_dir`}}/", "destination": "{{user `chef_dir`}}/cookbooks" },
+    { "type": "file", "source": "{{user `local_chef_data_bag_path`}}/", "destination": "{{user `chef_dir`}}/data_bags" },
     { "type": "file", "source": "{{user `conf_dir`}}/validation/encrypted_data_bag_secret.pem", "destination": "/etc/chef/encrypted_data_bag_secret" },
     {
       "type": "chef-client",
