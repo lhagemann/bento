@@ -54,17 +54,13 @@
   ],
   "post-processors": [
     {
+      "keep_input_artifact": true,
       "only": ["vbox-ubuntu-trusty"],
       "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
       "type": "vagrant"
     }
   ],
   "provisioners": [
-    {
-      "destination": "/tmp/bento-metadata.json",
-      "source": "{{user `metadata`}}",
-      "type": "file"
-    },
     {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
@@ -74,7 +70,6 @@
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "scripts": [
-        "scripts/common/metadata.sh",
         "scripts/ubuntu/update.sh",
         "scripts/ubuntu/depends.sh",
         "scripts/common/sshd.sh",
@@ -86,21 +81,7 @@
         "scripts/common/minimize.sh"
       ],
       "type": "shell"
-    }, 
-    { "type": "shell", "script": "scripts/chef/bootstrap.sh" },    
-    { "type": "file", "source": "{{user `local_chef_dir`}}/", "destination": "{{user `chef_dir`}}/cookbooks" },
-    { "type": "file", "source": "{{user `local_chef_data_bag_path`}}/", "destination": "{{user `chef_dir`}}/data_bags" },
-    { "type": "file", "source": "{{user `conf_dir`}}/validation/encrypted_data_bag_secret.pem", "destination": "/etc/chef/encrypted_data_bag_secret" },
-    {
-      "type": "chef-client",
-      "chef_environment": "{{user `chef_env`}}",
-      "server_url": "http://localhost:8889",
-      "config_template"   : "templates/chef-client.rb.template",
-      "skip_clean_node": true,
-      "skip_clean_client": true,
-      "run_list": [ "recipe[_base::full]" ]
-    },
-    {"type": "shell", "script": "scripts/chef/cleanup.sh"}
+    }
   ],
   "variables": {
     "box_basename": "ubuntu-14.04",
