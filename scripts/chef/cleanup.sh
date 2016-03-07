@@ -5,10 +5,7 @@ sudo apt-get -y autoremove
 sudo apt-get clean
 
 #Clean up tmp
-sudo rm -rf /tmp/*
-
-sudo passwd -d ubuntu
-sudo rm /home/ubuntu/.ssh/authorized_keys
+#sudo rm -rf /tmp/*
 
 # reassign /etc/chef
 sudo chown -R root:root /etc/chef

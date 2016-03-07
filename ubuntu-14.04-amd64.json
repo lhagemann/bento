@@ -50,12 +50,19 @@
       ],
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{ user `template` }}"
+    },
+    {
+      "type": "virtualbox-ovf",
+      "source_path": "packer-ubuntu-14.04-amd64-virtualbox/ubuntu-14.04-amd64.ovf",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
     }
   ],
   "post-processors": [
     {
       "keep_input_artifact": true,
-      "only": ["vbox-ubuntu-trusty"],
+      "only": ["vbox-ubuntu-trusty","virtualbox-ovf"],
       "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
       "type": "vagrant"
     }
@@ -81,7 +88,11 @@
         "scripts/common/minimize.sh"
       ],
       "type": "shell"
-    }
+    },
+    { "type": "shell", "script": "scripts/chef/bootstrap.sh" },
+    { "type": "file", "source": "{{user `local_chef_dir`}}/", "destination": "{{user `chef_dir`}}/cookbooks" },
+    { "type": "file", "source": "{{user `local_chef_data_bag_path`}}/", "destination": "{{user `chef_dir`}}/data_bags" },
+    { "type": "file", "source": "{{user `conf_dir`}}/validation/encrypted_data_bag_secret.pem", "destination": "/etc/chef/encrypted_data_bag_secret" }
   ],
   "variables": {
     "box_basename": "ubuntu-14.04",
@@ -90,7 +101,6 @@
     "local_chef_dir": "{{env `HOME`}}/dynwork/repos/clean_cookbooks",
     "local_chef_data_bag_path": "{{env `DYN_CHEF_DATA`}}/data_bags",
     "chef_node_name": "packer-ubuntu-trusty",
-    "chef_env": "dev",
     "conf_dir": "{{env `HOME`}}/.chef/",
     "description": "ubuntu trusty, provisioned with chef-zero && _base::full",
     "git_revision": "__unknown_git_revision__",

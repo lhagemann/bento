@@ -2,7 +2,6 @@ require 'cgi'
 require 'json'
 require 'net/http'
 require 'kitchen'
-require 'aws-sdk'
 require 'mixlib/shellout'
 
 
@@ -123,8 +122,6 @@ end
 def build_command(template)
   cmd = %W[./bin/bento build #{template}]
   cmd.insert(2, "--only #{ENV['BENTO_PROVIDERS']}") if ENV['BENTO_PROVIDERS']
-  cmd.insert(2, "--mirror #{ENV['PACKER_MIRROR']}") if private?(template)
-  cmd.insert(2, "--version #{ENV['BENTO_VERSION']}") if ENV['BENTO_VERSION']
   cmd.join(" ")
 end
 
