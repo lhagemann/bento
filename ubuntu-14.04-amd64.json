@@ -99,7 +99,7 @@
       "config_template"   : "templates/chef-client.rb.template",
       "skip_clean_node": true,
       "skip_clean_client": true,
-      "run_list": [ "recipe[_base::full]" ]
+      "run_list": "{{user `chef_run_list`}}"
     },
     {"type": "shell", "script": "scripts/chef/cleanup.sh"}
   ],
@@ -109,6 +109,7 @@
     "chef_dir": "/tmp/packer-chef-client",
     "local_chef_dir": "{{env `HOME`}}/dynwork/repos/simple_chef_repo",
     "chef_node_name": "packer-ubuntu-trusty",
+    "chef_run_list": "",
     "conf_dir": "{{env `HOME`}}/.chef/",
     "description": "ubuntu trusty, provisioned with chef-zero && _base::full",
     "git_revision": "__unknown_git_revision__",
