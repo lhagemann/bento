@@ -7,3 +7,4 @@ role_path         "{{user `chef_dir`}}/roles"
 data_bag_path     "{{user `chef_dir`}}/data_bags"
 cookbook_path     [ "{{user `chef_dir`}}/cookbooks" ]
 node_name         "{{user `chef_node_name`}}"
+encrypted_data_bag_secret "/etc/chef/encrypted_data_bag_secret"
