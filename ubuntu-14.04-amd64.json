@@ -91,11 +91,12 @@
       "only": ["vbox-ubuntu-trusty"]
     },
     { "type": "shell", "script": "scripts/chef/bootstrap.sh" },
-    { "type": "file", "source": "{{user `local_chef_dir`}}/cookbooks", "destination": "{{user `chef_dir`}}" },
-    { "type": "file", "source": "{{user `local_chef_dir`}}/data_bags", "destination": "{{user `chef_dir`}}" },
+    { "type": "file", "source": "{{user `local_berkshelf_vendor`}}", "destination": "{{user `chef_dir`}}/cookbooks" },
+    { "type": "file", "source": "{{user `chef_data_bags`}}/data_bags", "destination": "{{user `chef_dir`}}/data_bags" },
     { "type": "file", "source": "{{user `conf_dir`}}/validation/encrypted_data_bag_secret.pem", "destination": "/etc/chef/encrypted_data_bag_secret" },
     {
       "type": "chef-client",
+      "install_command": "curl -L https://www.chef.io/chef/install.sh | sudo bash -s -- -v {{user `chef_version`}}",
       "server_url": "http://localhost:8889",
       "config_template"   : "templates/chef-client.rb.template",
       "skip_clean_node": true,
@@ -107,8 +108,10 @@
   "variables": {
     "box_basename": "ubuntu-14.04",
     "build_timestamp": "{{isotime \"20060102150405\"}}",
+    "chef_version": "11.12.8-2",
     "chef_dir": "/tmp/packer-chef-client",
-    "local_chef_dir": "{{env `HOME`}}/dynwork/repos/simple_chef_repo",
+    "chef_data_bags": "{{env `DYN_CHEF_DATA`}}",
+    "local_berkshelf_vendor": "berks-cookbooks",
     "chef_node_name": "packer-ubuntu-trusty",
     "chef_run_list": "",
     "conf_dir": "{{env `HOME`}}/.chef/",

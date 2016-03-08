@@ -9,3 +9,6 @@ packer.log
 *.variables.json
 /builds/
 .kitchen
+*.lock
+/berks-cookbooks/
+/output*
