@@ -87,7 +87,8 @@
         "scripts/ubuntu/cleanup.sh",
         "scripts/common/minimize.sh"
       ],
-      "type": "shell"
+      "type": "shell",
+      "only": ["vbox-ubuntu-trusty"]
     },
     { "type": "shell", "script": "scripts/chef/bootstrap.sh" },
     { "type": "file", "source": "{{user `local_chef_dir`}}/cookbooks", "destination": "{{user `chef_dir`}}" },
